@@ -1,0 +1,20 @@
+{
+  "name": "raspberryrio-dashboard",
+  "version": "0.0.1",
+  "description": "The dashboard for the RaspberryRIO Project, a RaspberryPi Python-based robot controller.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "rebuild" : "./node_modules/.bin/electron-rebuild.cmd",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Rooplall",
+  "license": "ISC",
+  "dependencies": {
+    "gamepad": "^1.6.0"
+  },
+  "devDependencies": {
+    "electron": "^3.0.3",
+    "electron-rebuild": "^1.8.2"
+  }
+}

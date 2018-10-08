@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>ControlStation</title>
+
+    <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+
+    <script src="assets/js/Sortable.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/material-icons.min.css">
+    <link rel="stylesheet" href="assets/css/scrollbar.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="driverstation-body">
+        <div class="driverstation-sidebar"><button class="btn btn-primary driverstation-sidebar-button" type="button" id="ds-window-main-btn"><span class="driverstation-sidebar-button-span"></span><i class="fa fa-power-off driverstation-sidebar-button-icon"></i></button><button class="btn btn-secondary driverstation-sidebar-button"
+                type="button" id="ds-window-usb-btn"><i class="fa fa-usb driverstation-sidebar-button-icon"></i><span class="driverstation-sidebar-button-span"></span></button><button class="btn btn-secondary driverstation-sidebar-button" type="button" id="ds-window-config-btn"><i class="fa fa-gear driverstation-sidebar-button-icon"></i><span class="driverstation-sidebar-button-span"></span></button>
+            <button
+                class="btn btn-secondary driverstation-sidebar-button small" type="button" disabled="disabled"><span class="driverstation-sidebar-button-span"></span></button>
+        </div>
+        <div id="window-main" class="driverstation-main-window">
+            <div class="driverstation-panel-col1">
+                <p class="text-center text-white-50 driverstation-status-panel-main-t">RaspberryRIO Control Station</p>
+                <div>
+                    <div class="ds-statpanel-div">
+                        <p class="text-left text-white ds-statbar-title">Robot Voltage</p>
+                        <div class="progress ds-progressbar-robot">
+                            <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
+                        </div>
+                        <p class="text-right text-warning ds-progressbar-robot-p">120V</p>
+                    </div>
+                    <div class="ds-statpanel-div">
+                        <p class="text-left text-white ds-statbar-title">Device Battery</p>
+                        <div class="progress ds-progressbar">
+                            <div class="progress-bar bg-primary" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"><span class="sr-only">80%</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="driverstation-state-panel"><button class="btn btn-success driverstation-state-panel-button enable-txt" type="button" id="ds-robot-enable-btn" style="border-right: 1px solid #444">Enable</button><button class="btn btn-danger driverstation-state-panel-button disable-txt active-btn"
+                        type="button" id="ds-robot-disable-btn">Disable</button></div>
+            </div>
+            <div class="driverstation-status-panel">
+                <p class="text-center text-white-50 driverstation-status-panel-main-t">0:00.0</p>
+                <div class="driverstation-status-panel-label-container">
+                    <div class="driverstation-status-panel-label-div">
+                        <p class="driverstation-status-panel-label">Communication</p>
+                        <div class="driverstation-status-panel-label icon disabled-icon"></div>
+                    </div>
+                    <div class="driverstation-status-panel-label-div">
+                        <p class="driverstation-status-panel-label">Robot Code</p>
+                        <div class="driverstation-status-panel-label icon disabled-icon"></div>
+                    </div>
+                    <div class="driverstation-status-panel-label-div"><label class="controllers-count-label">0</label>
+                        <p class="driverstation-status-panel-label">Controllers</p>
+                        <div class="driverstation-status-panel-label icon disabled-icon"></div>
+                    </div>
+                </div>
+                <p class="text-center driverstation-status-panel-main-p">STATUS MESSAGE</p>
+            </div>
+            <div class="driverstation-panel-output-div">
+                <div class="driverstation-panel-output"></div>
+            </div>
+        </div>
+        <div id="window-USB" class="driverstation-main-window hidden">
+            <div class="driverstation-panel-controller-main">
+                <div class="row">
+                    <div class="col-lg-5" style="padding-right:0px">
+                        <p class="text-monospace text-white usb-panel-title">USB Device Order</p>
+                        <div id="usb-panel-scrollable" class="usb-panel-scrollable">
+                            <div class="usb-panel-device-item">
+                                <div class="usb-panel-device-item-handle"><i class="material-icons usb-panel-device-item-handle-icon">drag_handle</i></div>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-index">1</p>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-devicename">DEVICE NAME</p>
+                            </div>
+                            <div class="usb-panel-device-item">
+                                <div class="usb-panel-device-item-handle"><i class="material-icons usb-panel-device-item-handle-icon">drag_handle</i></div>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-index">2</p>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-devicename">DEVICE NAME</p>
+                            </div>
+                            <div class="usb-panel-device-item">
+                                <div class="usb-panel-device-item-handle"><i class="material-icons usb-panel-device-item-handle-icon">drag_handle</i></div>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-index">3</p>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-devicename">DEVICE NAME</p>
+                            </div>
+                            <div class="usb-panel-device-item">
+                                <div class="usb-panel-device-item-handle"><i class="material-icons usb-panel-device-item-handle-icon">drag_handle</i></div>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-index">3</p>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-devicename">DEVICE NAME</p>
+                            </div>
+                            <div class="usb-panel-device-item">
+                                <div class="usb-panel-device-item-handle"><i class="material-icons usb-panel-device-item-handle-icon">drag_handle</i></div>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-index">3</p>
+                                <p class="text-monospace text-white usb-panel-device-item-p usb-panel-device-item-usb-devicename">DEVICE NAME</p>
+                            </div>
+                        </div><button class="btn btn-dark btn-sm usb-panel-refresh" type="button">RESCAN<i class="fa fa-refresh usb-panel-refresh-icon"></i></button></div>
+                    <div class="col-lg-7" style="padding-left:0px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/Sortable.min.js"></script>
+</body>
+
+</html>
